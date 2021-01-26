@@ -1,0 +1,39 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch assets/sass/main.scss:assets/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rukundoeric/todo-list.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rukundoeric/todo-list/issues"
+  },
+  "homepage": "https://github.com/rukundoeric/todo-list#readme",
+  "devDependencies": {
+    "babel-eslint": "10.1.x",
+    "eslint": "6.8.x",
+    "eslint-config-airbnb-base": "14.1.x",
+    "eslint-plugin-import": "2.20.x",
+    "stylelint": "13.3.x",
+    "stylelint-config-standard": "20.0.x",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "3.17.x",
+    "webpack": "^5.17.0",
+    "webpack-cli": "^4.4.0"
+  },
+  "dependencies": {
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "eslint-loader": "^4.0.2",
+    "file-loader": "^6.2.0",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0"
+  }
+}
