@@ -15,6 +15,7 @@ button {
   border: 0;
   border-radius: 10px;
 }
+
 button:focus {
   border: 0;
   outline: none;
