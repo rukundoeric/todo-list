@@ -28,4 +28,8 @@ button:focus {
   border: 1px solid gray;
 }
 
+.task-item {
+  border: 1px solid gray;
+}
+
 /*# sourceMappingURL=style.css.map */
