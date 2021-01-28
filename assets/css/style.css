@@ -24,4 +24,8 @@ button:focus {
   box-shadow: 0 0 10px #e6e6e6;
 }
 
+.task-list {
+  border: 1px solid gray;
+}
+
 /*# sourceMappingURL=style.css.map */
