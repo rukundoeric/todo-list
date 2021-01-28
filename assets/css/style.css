@@ -15,10 +15,13 @@ button {
   border: 0;
   border-radius: 10px;
 }
-
 button:focus {
   border: 0;
   outline: none;
+}
+
+.item {
+  box-shadow: 0 0 10px #e6e6e6;
 }
 
 /*# sourceMappingURL=style.css.map */
