@@ -20,8 +20,29 @@ button:focus {
   outline: none;
 }
 
+.action-btns {
+  display: none;
+}
+
+.edit,
+.delete {
+  border-radius: 5px;
+  padding: 3px 20px;
+}
+
+.edit {
+  background-color: #9e9797;
+}
+
+.delete {
+  background-color: #d84040;
+}
+
 .item {
   box-shadow: 0 0 10px #e6e6e6;
+}
+.item:hover .action-btns {
+  display: flex;
 }
 
 .task-list {

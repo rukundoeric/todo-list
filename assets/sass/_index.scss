@@ -21,8 +21,32 @@ button {
   }
 }
 
+.action-btns {
+  display: none;
+}
+
+.edit,
+.delete {
+  border-radius: 5px;
+  padding: 3px 20px;
+}
+
+.edit {
+  background-color: rgb(158, 151, 151);
+}
+
+.delete {
+  background-color: rgb(216, 64, 64);
+}
+
 .item {
   box-shadow: 0 0 10px rgb(230, 230, 230);
+
+  &:hover {
+    .action-btns {
+      display: flex;
+    }
+  }
 }
 
 .task-list {

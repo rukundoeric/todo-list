@@ -1,42 +1,41 @@
 class LocalStorage {
   constructor() {
-    const projectList = [
-      {
-        id: '35365',
-        name: 'Project name',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, architecto.',
-        tasks: [
-          {
-            title: 'How to create USER',
-            dueDate: '23/12/2020',
-          },
-          {
-            title: 'How to create USER',
-            dueDate: '23/12/2020',
-          },
-          {
-            title: 'How to create USER',
-            dueDate: '23/12/2020',
-          },
-        ],
-      },
-    ];
-    // this.all_list = localStorage.getItem('todo-app');
-    this.all_list = JSON.stringify(projectList);
+    const sample = {
+      id: '35365',
+      name: 'Project name',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, architecto.',
+      tasks: [
+        {
+          title: 'How to create USER',
+          dueDate: '23/12/2020',
+        },
+        {
+          title: 'How to create USER',
+          dueDate: '23/12/2020',
+        },
+        {
+          title: 'How to create USER',
+          dueDate: '23/12/2020',
+        },
+      ],
+    };
+    const lStorage = localStorage.getItem('todo-app');
+    // console.log(lStorage);
+    this.all_list = JSON.parse(lStorage) || [{ ...sample }];
   }
 
   all() {
-    return JSON.parse(this.all_list);
+    return this.all_list;
   }
 
-  save(data) {
-    localStorage.setItem('todo-app', data);
+  save(data, callback) {
+    localStorage.setItem('todo-app', JSON.stringify(data));
+    callback();
     return this;
   }
 
   get(id) {
-    const data = JSON.parse(this.all_list);
-    return data.find((obj) => obj.id === id);
+    return this.all_list.find((obj) => obj.id === id);
   }
 }
 
