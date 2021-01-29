@@ -1,20 +1,12 @@
-const projectList = [
-  {
-    name: 'Project name',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, architecto.',
-    tasks: [
-      {
-        title: 'How to create USER',
-        dueDate: '23/12/2020',
-      },
-      {
-        title: 'How to create USER',
-        dueDate: '23/12/2020',
-      },
-      {
-        title: 'How to create USER',
-        dueDate: '23/12/2020',
-      },
-    ],
-  },
-];
+/* eslint-disable no-restricted-globals */
+
+import queryString from 'query-string';
+import { ListProjects, ProjectDetails } from './modules/project/index';
+
+const { project } = queryString.parse(location.search);
+
+if (project) {
+  ProjectDetails(project);
+} else {
+  ListProjects();
+}
