@@ -2,13 +2,9 @@ class LocalStorage {
   constructor() {
     const sample = {
       id: '35365',
-      name: 'Project name',
+      name: 'sample',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, architecto.',
       tasks: [
-        {
-          title: 'How to create USER',
-          dueDate: '23/12/2020',
-        },
         {
           title: 'How to create USER',
           dueDate: '23/12/2020',
@@ -20,7 +16,6 @@ class LocalStorage {
       ],
     };
     const lStorage = localStorage.getItem('todo-app');
-    // console.log(lStorage);
     this.all_list = JSON.parse(lStorage) || [{ ...sample }];
   }
 
@@ -30,7 +25,7 @@ class LocalStorage {
 
   save(data, callback) {
     localStorage.setItem('todo-app', JSON.stringify(data));
-    callback();
+    if (callback) { callback(); }
     return this;
   }
 
