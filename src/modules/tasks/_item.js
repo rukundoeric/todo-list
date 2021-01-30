@@ -7,7 +7,6 @@ export default ({ id, title, date }, DeleteTask, OpenEditTask) => {
 
   new Element().parse(`
     <div class="d-flex align-items-center">
-      <input type="checkbox" />
       <span class="mx-3">${title}</span>
     </div>
   `).appendTo(container.element());

@@ -6,10 +6,12 @@ class LocalStorage {
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, architecto.',
       tasks: [
         {
+          id: '4544546g46',
           title: 'How to create USER',
           dueDate: '23/12/2020',
         },
         {
+          id: '3353553353fmv',
           title: 'How to create USER',
           dueDate: '23/12/2020',
         },

@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import uuid from 'uuid-random';
 import queryString from 'query-string';
+import $ from 'jquery';
 import TaskItem from './_item';
 import Element from '../../helpers/element';
 import LocalStorage from '../../helpers/localStorage';
@@ -46,13 +47,6 @@ export const ProjectDetails = (id) => {
   loadProjectTasks(tasks);
 };
 
-const closeModal = (modal) => {
-  new Element().get('body').classList.remove('modal-open');
-  new Element().get(modal).classList.remove('show');
-  // new Element().get(modal).style.display = 'none';
-  new Element().get('.modal-backdrop').style.display = 'none';
-};
-
 export const UpdateTask = (project) => {
   new Element().get('#task-edit-form').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -72,7 +66,7 @@ export const UpdateTask = (project) => {
       .value();
     LocalStorage.save(data);
     ProjectDetails(project);
-    closeModal('#editModal');
+    $('.btn-close').click();
   });
 };
 
@@ -93,7 +87,7 @@ export const CreateNewTask = (project) => {
       .value();
     LocalStorage.save(data);
     ProjectDetails(project);
-    closeModal('#exampleModal');
+    $('.btn-close').click();
   });
 };
 
