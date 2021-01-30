@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import uuid from 'uuid-random';
 import _ from 'lodash';
 import ProjectItem from './_item';
@@ -5,11 +6,18 @@ import Element from '../../helpers/element';
 import LocalStorage from '../../helpers/localStorage';
 import loadProjectTasks from '../tasks/index';
 
+
+export const DeleteProject = ({ target: { dataset: { id } } }) => {
+  const data = LocalStorage.all();
+  _.remove(data, (project) => project.id === id);
+  LocalStorage.save(data, ListProjects);
+};
+
 export const ListProjects = () => {
   const pContainer = new Element().get('#project-list');
   pContainer.innerHTML = '';
   LocalStorage.all().forEach(item => {
-    new Element().parse(ProjectItem(item)).appentTo(pContainer);
+    ProjectItem(item, DeleteProject).appendTo(pContainer);
   });
 };
 
@@ -31,10 +39,4 @@ export const CreateNewProject = () => {
     });
     LocalStorage.save(data, ListProjects);
   });
-};
-
-export const DeleteProject = (id) => {
-  const data = LocalStorage.all();
-  _.remove(data, (project) => project.id === id);
-  LocalStorage.save(data, ListProjects);
 };

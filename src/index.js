@@ -5,16 +5,11 @@ import queryString from 'query-string';
 import {
   ListProjects,
   ProjectDetails,
-  CreateNewProject,
-  DeleteProject,
+  CreateNewProject
 } from './modules/project/index';
 
 
 const { project } = queryString.parse(location.search);
-
-function deleteProject(id) {
-  console.log(id);
-}
 
 if (project) {
   ProjectDetails(project);

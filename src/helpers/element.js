@@ -29,7 +29,8 @@ export default class Element {
     return this;
   }
 
-  appentTo(parent) {
+  appendTo(parent) {
     parent.appendChild(this.elm);
+    return this;
   }
 }
