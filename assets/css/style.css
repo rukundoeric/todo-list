@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+input,
+button {
+  outline: none;
+}
+
+button {
+  background-color: #0e6e4e;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+}
+button:focus {
+  border: 0;
+  outline: none;
+}
+
+.action-btns {
+  display: none;
+}
+
+.edit,
+.delete {
+  border-radius: 5px;
+  padding: 3px 20px;
+}
+
+.edit {
+  background-color: #9e9797;
+}
+
+.delete {
+  background-color: #d84040;
+}
+
+.item {
+  box-shadow: 0 0 10px #e6e6e6;
+}
+.item:hover .action-btns {
+  display: flex;
+}
+
+.task-list {
+  border: 1px solid gray;
+}
+
+.task-item {
+  border: 1px solid gray;
+}
+
+/*# sourceMappingURL=style.css.map */
