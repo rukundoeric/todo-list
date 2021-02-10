@@ -9,7 +9,7 @@ import Element from '../../helpers/element';
 import LocalStorage from '../../helpers/localStorage';
 
 
-const OpenEditTask = ({ target: { dataset: { id } } }) => {
+export const OpenEditTask = ({ target: { dataset: { id } } }) => {
   const { project } = queryString.parse(location.search);
   const { tasks } = LocalStorage.get(project);
   const item = tasks.find((obj) => obj.id === id);
@@ -19,15 +19,18 @@ const OpenEditTask = ({ target: { dataset: { id } } }) => {
   form.elements.date.value = item.date;
 };
 
-const DeleteTask = ({ target: { dataset: { id } } }) => {
+export const DeleteTask = ({ target: { dataset: { id } } }) => {
   const { project } = queryString.parse(location.search);
   let data = LocalStorage.all();
-  const Item = LocalStorage.get(project);
+  const Item = LocalStorage.get(project || '35365');
   _.remove(Item.tasks, (task) => task.id === id);
   data = _(data).keyBy('id').set(Item.id, Item).values()
     .value();
   LocalStorage.save(data);
-  ProjectDetails(project);
+  return {
+    status: 'deleted',
+    message: 'Task Deleted!!',
+  };
 };
 
 const loadProjectTasks = (tasks) => {
@@ -41,51 +44,69 @@ const loadProjectTasks = (tasks) => {
 };
 
 export const ProjectDetails = (id) => {
-  const { name, description, tasks } = LocalStorage.get(id);
+  let res; const
+    { name, description, tasks } = LocalStorage.get(id);
   new Element().get('#project-name').innerHTML = name;
   new Element().get('#project-desc').innerHTML = description;
   loadProjectTasks(tasks);
+  return res;
+};
+
+export const UpdateTaskFunc = (project, event) => {
+  const formData = new FormData(event.target);
+  let data = LocalStorage.all();
+  const Item = LocalStorage.get(project);
+  let tasks = Item.tasks || [];
+  const task = {
+    id: formData.get('id'),
+    title: formData.get('title'),
+    date: formData.get('date'),
+  };
+  tasks = _(tasks).keyBy('id').set(task.id, task).values()
+    .value();
+  Item.tasks = tasks;
+  data = _(data).keyBy('id').set(project, Item).values()
+    .value();
+  LocalStorage.save(data);
+  return {
+    status: 'updated',
+    message: 'Task Updated!!',
+  };
 };
 
 export const UpdateTask = (project) => {
   new Element().get('#task-edit-form').addEventListener('submit', (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    let data = LocalStorage.all();
-    const Item = LocalStorage.get(project);
-    let tasks = Item.tasks || [];
-    const task = {
-      id: formData.get('id'),
-      title: formData.get('title'),
-      date: formData.get('date'),
-    };
-    tasks = _(tasks).keyBy('id').set(task.id, task).values()
-      .value();
-    Item.tasks = tasks;
-    data = _(data).keyBy('id').set(project, Item).values()
-      .value();
-    LocalStorage.save(data);
+    UpdateTaskFunc(project, event);
     ProjectDetails(project);
     $('.btn-close').click();
   });
 };
 
+export const CreateTaskFunc = (project, event) => {
+  const formData = new FormData(event.target);
+  let data = LocalStorage.all();
+  const Item = LocalStorage.get(project);
+  const tasks = Item.tasks || [];
+  tasks.push({
+    id: uuid(),
+    title: formData.get('title'),
+    date: formData.get('date'),
+  });
+  Item.tasks = tasks;
+  data = _(data).keyBy('id').set(project, Item).values()
+    .value();
+  LocalStorage.save(data);
+  return {
+    status: 'created',
+    message: 'Task Created!!',
+  };
+};
+
 export const CreateNewTask = (project) => {
   new Element().get('#task-form').addEventListener('submit', (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    let data = LocalStorage.all();
-    const Item = LocalStorage.get(project);
-    const tasks = Item.tasks || [];
-    tasks.push({
-      id: uuid(),
-      title: formData.get('title'),
-      date: formData.get('date'),
-    });
-    Item.tasks = tasks;
-    data = _(data).keyBy('id').set(project, Item).values()
-      .value();
-    LocalStorage.save(data);
+    CreateTaskFunc(project, event);
     ProjectDetails(project);
     $('.btn-close').click();
   });
