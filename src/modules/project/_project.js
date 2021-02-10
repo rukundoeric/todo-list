@@ -13,6 +13,7 @@ class Project {
     LocalStorage.all().forEach(item => {
       ProjectItem(item, this.delete).appendTo(pContainer);
     });
+    return LocalStorage.all();
   }
 
   create() {
@@ -26,19 +27,23 @@ class Project {
       });
       LocalStorage.save(data, this.display);
     });
+    return true;
   }
 
   details(id) {
-    const { name, description, tasks } = LocalStorage.get(id);
+    let res; const
+      { name, description, tasks } = LocalStorage.get(id);
     new Element().get('#project-name').innerHTML = name;
     new Element().get('#project-desc').innerHTML = description;
     loadProjectTasks(tasks);
+    return res;
   }
 
   delete({ target: { dataset: { id } } }) {
     const data = LocalStorage.all();
     _.remove(data, (project) => project.id === id);
     LocalStorage.save(data, this.display);
+    return true;
   }
 }
 
